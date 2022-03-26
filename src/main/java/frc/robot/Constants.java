@@ -248,6 +248,9 @@ public final class Constants {
 		public static final double DRIVE_FORWARD_TIME = 3.0;
 		public static final double AUTONOMOUS_SPEED = 0.6;
 
+        public static final double FLYWHEEL_REV_TIME_SECONDS = 2;
+        public static final double TIMEOUT_SECONDS = 10; 
+
         
 	}
 
