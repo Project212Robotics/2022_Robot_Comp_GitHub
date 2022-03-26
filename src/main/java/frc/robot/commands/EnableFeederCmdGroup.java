@@ -24,15 +24,15 @@ public class EnableFeederCmdGroup extends SequentialCommandGroup {
       new PrintCommand("EnableFeederCmdGroup started!"),
       new ConditionalCommand(
         new SequentialCommandGroup(
-          new ShootOneBallCmdGroup(storage),
+          new AutoOneBallCmdGroup(storage),
           new InstantCommand(() -> storage.setSecondBall(false)),
           new WaitCommand(StorageConstants.TIME_BETWEEN_SHOTS),
-          new ShootOneBallCmdGroup(storage),
+          new AutoOneBallCmdGroup(storage),
           new InstantCommand(() -> storage.setFirstBall(false))
         ),
 
         new SequentialCommandGroup(
-        new ShootOneBallCmdGroup(storage),
+        new AutoOneBallCmdGroup(storage),
         new InstantCommand(() -> storage.setFirstBall(false)) 
         ),
       
