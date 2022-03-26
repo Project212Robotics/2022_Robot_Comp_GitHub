@@ -43,6 +43,7 @@ public class OneBallAutoCmdGroup extends SequentialCommandGroup {
        * 
        * So I can get out of shooting a ball once
        */
+      
       new ParallelCommandGroup(
         new RunCommand(turretSubsystem::turretWithLimelight, turretSubsystem),
         new EnableShooterCmd(shooterSubsystem), 
@@ -58,6 +59,7 @@ public class OneBallAutoCmdGroup extends SequentialCommandGroup {
       new RunCommand(shooterSubsystem::stopMotors),
       
       new PrintCommand("AutonomousCmdGroup ended!")
+      
     );
   }
 }

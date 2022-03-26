@@ -29,6 +29,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.StorageSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.ShooterSubsystem.VelocityControlMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -52,7 +53,7 @@ public class RobotContainer {
   // Shooter files - LL
   public static ShooterSubsystem shooter = new ShooterSubsystem();
   private final ShooterCmd shooterCmd = new ShooterCmd(shooter);
-  private final EnableShooterCmd enableShooterCmd = new EnableShooterCmd(shooter);
+  private final EnableShooterCmd enableShooterCmd = new EnableShooterCmd(shooter, VelocityControlMode.LIMELIGHT);
 
   // Storage files - LL
   public static StorageSubsystem storage = new StorageSubsystem();
@@ -70,7 +71,7 @@ public class RobotContainer {
   private final TurretCmd turretCmd = new TurretCmd(turret);
   
   // Autonomous - LL
-  private final OneBallAutoCmdGroup autonomousCmdGroup = new OneBallAutoCmdGroup(driveTrain, storage, hang, intake, shooter, turret);
+  private final OneBallAutoCmdGroup oneBallAutoCmdGroup = new OneBallAutoCmdGroup(driveTrain, storage, hang, intake, shooter, turret);
 
   // Controller files - LL
   public static XboxController driverJoystick = new XboxController(Constants.OI.DRIVER_NUMBER);
@@ -88,7 +89,7 @@ public class RobotContainer {
     intake.setDefaultCommand(intakeWithPaddlesCmd);
     shooter.setDefaultCommand(shooterCmd);
     storage.setDefaultCommand(storageCmd);
-    //turret.setDefaultCommand(turretCmd);
+    turret.setDefaultCommand(turretCmd);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -153,9 +154,12 @@ public class RobotContainer {
     final JoystickButton enableFeeder = new JoystickButton(gunnerJoystick, XboxController.Button.kRightBumper.value);
     enableFeeder.whileHeld(enableFeederCmd);
     
+    /*
     // Enable DriveWithLimelight
     new JoystickButton(gunnerJoystick, XboxController.Button.kX.value)
       .whenHeld(driveWithLimelightCmd);
+    */
+    
     /*
     // Enable feeder Cmd Group (AUTO)
     final JoystickButton enableFeeder = new JoystickButton(gunnerJoystick, XboxController.Button.kRightBumper.value);
@@ -173,6 +177,6 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     //return autonomousCmdGroup;
     //return null;
-    return autonomousCmdGroup;
+    return oneBallAutoCmdGroup;
   }
 }

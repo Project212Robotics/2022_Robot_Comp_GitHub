@@ -151,8 +151,8 @@ public final class Constants {
         */
 
         public final static class ShooterVelocities {
-            public final static double AUTO_BOTTOM = 5500;
-            public final static double AUTO_TOP = 8300;
+            //public final static double AUTO_BOTTOM = 5500;
+            //public final static double AUTO_TOP = 8300;
 
             /**
              * soscistatistics.com/tests/regression/default.aspx
@@ -180,8 +180,8 @@ public final class Constants {
              * 
              */
             
-            public final static double BOTTOM = 5000;   // 6.97 feet
-            public final static double TOP = 5000;      // 6.97 feet
+            //public final static double BOTTOM = 5000;   // 6.97 feet
+            //public final static double TOP = 5000;      // 6.97 feet
 
             //public final static double BOTTOM = 5300; //9.2 feet
             //public final static double TOP = 5500; // 9.2 feet
