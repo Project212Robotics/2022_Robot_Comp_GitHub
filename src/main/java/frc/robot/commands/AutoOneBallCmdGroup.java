@@ -18,9 +18,9 @@ import frc.robot.subsystems.StorageSubsystem.MotorSelection;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ShootOneBallCmdGroup extends SequentialCommandGroup {
+public class AutoOneBallCmdGroup extends SequentialCommandGroup {
   /** Creates a new ShootOneBallCmdGroup. */
-  public ShootOneBallCmdGroup(StorageSubsystem storage) {
+  public AutoOneBallCmdGroup(StorageSubsystem storage) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 

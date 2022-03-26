@@ -14,9 +14,9 @@ import frc.robot.subsystems.StorageSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TwoBallAutoCmdGroup extends SequentialCommandGroup {
+public class AutoTwoBallCmdGroup extends SequentialCommandGroup {
   /** Creates a new TwoBallAutoCmdGroup. */
-  public TwoBallAutoCmdGroup(DrivetrainSubsystem drivetrainSubsystem, StorageSubsystem storageSubsystem, 
+  public AutoTwoBallCmdGroup(DrivetrainSubsystem drivetrainSubsystem, StorageSubsystem storageSubsystem, 
   HangSubsystem hangSubsystem, IntakeSubsystem intakeSubsystem, ShooterSubsystem shooterSubsystem) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
