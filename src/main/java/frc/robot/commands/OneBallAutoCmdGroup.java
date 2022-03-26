@@ -36,7 +36,7 @@ public class OneBallAutoCmdGroup extends SequentialCommandGroup {
        * You cannot go backwards
        * 
        */
-      new DriveForwardCmd(drivetrainSubsystem, storageSubsystem, hangSubsystem, 4),
+      new DriveForwardCmd(drivetrainSubsystem, storageSubsystem, hangSubsystem, -4),
       
       /**
        * Figure out how to do a ParallelDeadlineCommandGroup
@@ -46,7 +46,10 @@ public class OneBallAutoCmdGroup extends SequentialCommandGroup {
       
       new ParallelCommandGroup(
         new RunCommand(turretSubsystem::turretWithLimelight, turretSubsystem),
-        new EnableShooterCmd(shooterSubsystem), 
+        new InstantCommand()
+        new EnableShooterCmd(shooterSubsystem),
+
+        
         .until(condition)
         .andTeh
         new EnableFeederCmd(storageSubsystem)

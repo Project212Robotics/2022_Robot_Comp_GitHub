@@ -11,22 +11,18 @@ import frc.robot.subsystems.ShooterSubsystem.VelocityControlMode;
 public class EnableShooterCmd extends CommandBase {
   /** Creates a new EnableShooterCmd. */
   private final ShooterSubsystem shooter;
-  private final VelocityControlMode mode;
 
-  public EnableShooterCmd(ShooterSubsystem shooter, VelocityControlMode mode) {
+  public EnableShooterCmd(ShooterSubsystem shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.shooter = shooter;
     addRequirements(shooter);
-
-    this.mode = mode;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     System.out.println("EnableShooterCmd started!");
-    shooter.setTargetBottomFlyWheelVelocity(mode);
-    shooter.setTargetTopFlyWheelVelocity(mode);
+    shooter.setVelocityControlMode(VelocityControlMode.LIMELIGHT);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -36,6 +35,8 @@ public class ShooterSubsystem extends SubsystemBase {
     LIMELIGHT
   }
 
+  VelocityControlMode velocityControlMode;
+
   public ShooterSubsystem() {
     bottomFlywheel = new WPI_TalonFX(Constants.PWM.Shooter.BOTTOM_FLYWHEEL);
     bottomFlywheel.setInverted(false);
@@ -53,6 +54,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     topFlywheel_targetVelocity_UnitsPer100ms = 0;
     bottomFlywheel_targetVelocity_UnitsPer100ms = 0;
+    
+    velocityControlMode = velocityControlMode.LIMELIGHT;
 
     SmartDashboard.putNumber("Target Top Flywheel Velocity", 0);
     SmartDashboard.putNumber("Target Bottom Flywheel Velocity", 0);
@@ -173,14 +176,22 @@ public class ShooterSubsystem extends SubsystemBase {
     topFlywheel.set(ControlMode.Velocity, topTargetVelocity); // 7000
   }
 
-  public void setTargetBottomFlyWheelVelocity(VelocityControlMode mode) {
+  public void setVelocityControlMode (VelocityControlMode mode) {
+    velocityControlMode = mode;
+  }
+
+  public VelocityControlMode getVelocityControlMode() {
+    return velocityControlMode;
+  }
+
+  public void setTargetBottomFlyWheelVelocity() {
     double m = ShooterConstants.BottomFlywheelConstants.BOTTOM_SLOPE;
     double b = ShooterConstants.BottomFlywheelConstants.BOTTOM_Y_INT;
     
-    if (mode == VelocityControlMode.MANUAL) {
+    if (getVelocityControlMode() == VelocityControlMode.MANUAL) {
       bottomFlywheel_targetVelocity_UnitsPer100ms = 
       SmartDashboard.getNumber("User-inputed Bottom Flywheel Velocity", 0);
-    } else if (mode == VelocityControlMode.LIMELIGHT) {
+    } else if (getVelocityControlMode() == VelocityControlMode.LIMELIGHT) {
       bottomFlywheel_targetVelocity_UnitsPer100ms = 
       (m * (getLimelightDistanceInches() / 12.0)) + (b);
     } else {
@@ -192,15 +203,15 @@ public class ShooterSubsystem extends SubsystemBase {
     return bottomFlywheel_targetVelocity_UnitsPer100ms;
   }
   
-  public void setTargetTopFlyWheelVelocity(VelocityControlMode mode) {
+  public void setTargetTopFlyWheelVelocity() {
     double m = ShooterConstants.TopFlywheelConstants.TOP_SLOPE;
     double b = ShooterConstants.TopFlywheelConstants.TOP_Y_INT;
     
     
-    if (mode == VelocityControlMode.MANUAL) {
+    if (getVelocityControlMode() == VelocityControlMode.MANUAL) {
       topFlywheel_targetVelocity_UnitsPer100ms = 
       SmartDashboard.getNumber("User-inputed Top Flywheel Velocity", 0);
-    } else if (mode == VelocityControlMode.LIMELIGHT) {
+    } else if (getVelocityControlMode() == VelocityControlMode.LIMELIGHT) {
       topFlywheel_targetVelocity_UnitsPer100ms = 
       (m * (getLimelightDistanceInches() / 12.0)) + (b);
     } else {
